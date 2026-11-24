@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/Enemy.tscn" id="1_enemy"]
+[ext_resource type="Script" path="res://scripts/world/location_exit.gd" id="2_exit_script"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_exit"]
+radius = 20.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_test_area"]
+vertices = PackedVector2Array(-400, -225, -62.5, -225, -62.5, -62.5, -400, -62.5, 62.5, -225, 400, -225, 400, -62.5, 62.5, -62.5, -400, -62.5, -62.5, -62.5, -62.5, 62.5, -400, 62.5, 62.5, -62.5, 400, -62.5, 400, 62.5, 62.5, 62.5, -400, 62.5, -62.5, 62.5, -62.5, 225, -400, 225, 62.5, 62.5, 400, 62.5, 400, 225, 62.5, 225, -62.5, -225, 62.5, -225, 62.5, -62.5, -62.5, -62.5, -62.5, 62.5, 62.5, 62.5, 62.5, 225, -62.5, 225)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19), PackedInt32Array(20, 21, 22, 23), PackedInt32Array(24, 25, 26, 27), PackedInt32Array(28, 29, 30, 31)])
+
+[node name="TestMap" type="Node2D"]
+
+
+[node name="Ground" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-400, -225, 400, -225, 400, 225, -400, 225)
+color = Color(0.12, 0.13, 0.12, 1)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_test_area")
+
+[node name="Obstacle" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" type="Polygon2D" parent="Obstacle"]
+polygon = PackedVector2Array(-40, -40, 40, -40, 40, 40, -40, 40)
+color = Color(0.3, 0.25, 0.2, 1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacle"]
+polygon = PackedVector2Array(-40, -40, 40, -40, 40, 40, -40, 40)
+
+[node name="Enemy" parent="." instance=ExtResource("1_enemy")]
+position = Vector2(145, 0)
+
+[node name="ExitToForestRuins" type="Area2D" parent="."]
+position = Vector2(360, 0)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("2_exit_script")
+target_location_path = "res://scenes/world/ForestRuins.tscn"
+arrival_position = Vector2(-315, 0)
+
+[node name="Frame" type="Polygon2D" parent="ExitToForestRuins"]
+polygon = PackedVector2Array(-18, -24, 18, -24, 18, 24, -18, 24)
+color = Color(0.28, 0.24, 0.2, 1)
+
+[node name="Portal" type="Polygon2D" parent="ExitToForestRuins"]
+polygon = PackedVector2Array(-11, -17, 11, -17, 11, 17, -11, 17)
+color = Color(0.78, 0.43, 0.2, 1)
+
+[node name="Label" type="Label" parent="ExitToForestRuins"]
+offset_left = -28.0
+offset_top = -45.0
+offset_right = 28.0
+offset_bottom = -25.0
+text = "ВЫХОД"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitToForestRuins"]
+shape = SubResource("CircleShape2D_exit")

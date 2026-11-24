@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/ashen_bolt.gd" id="1_bolt_script"]
+
+[node name="AshenBolt" type="Node2D"]
+script = ExtResource("1_bolt_script")
+
+[node name="Trail" type="Line2D" parent="."]
+points = PackedVector2Array(-9, 0, 0, 0)
+width = 3.0
+begin_cap_mode = 2
+end_cap_mode = 2
+default_color = Color(0.42, 0.75, 1, 0.72)
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(5, 0, 2.5, 4.3, -2.5, 4.3, -5, 0, -2.5, -4.3, 2.5, -4.3)
+color = Color(0.76, 0.91, 1, 1)

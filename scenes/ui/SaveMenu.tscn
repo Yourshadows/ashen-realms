@@ -1,0 +1,166 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/save_menu.gd" id="1_save_menu_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.075, 0.082, 0.088, 1)
+border_color = Color(0.43, 0.35, 0.23, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="SaveMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_save_menu_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.045, 0.052, 0.06, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Content" type="VBoxContainer" parent="CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="CenterContainer/Panel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.78, 0.56, 1)
+theme_override_font_sizes/font_size = 26
+text = "ASHEN REALMS"
+horizontal_alignment = 1
+
+[node name="SlotsPanel" type="VBoxContainer" parent="CenterContainer/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SlotsTitle" type="Label" parent="CenterContainer/Panel/Content/SlotsPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Выбери слот персонажа"
+horizontal_alignment = 1
+
+[node name="SlotRow1" type="HBoxContainer" parent="CenterContainer/Panel/Content/SlotsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Slot1Button" type="Button" parent="CenterContainer/Panel/Content/SlotsPanel/SlotRow1"]
+custom_minimum_size = Vector2(320, 48)
+layout_mode = 2
+text = "Слот 1  —  Новый персонаж"
+focus_mode = 0
+
+[node name="DeleteSlot1Button" type="Button" parent="CenterContainer/Panel/Content/SlotsPanel/SlotRow1"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+text = "Удалить"
+disabled = true
+focus_mode = 0
+
+[node name="SlotRow2" type="HBoxContainer" parent="CenterContainer/Panel/Content/SlotsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Slot2Button" type="Button" parent="CenterContainer/Panel/Content/SlotsPanel/SlotRow2"]
+custom_minimum_size = Vector2(320, 48)
+layout_mode = 2
+text = "Слот 2  —  Новый персонаж"
+focus_mode = 0
+
+[node name="DeleteSlot2Button" type="Button" parent="CenterContainer/Panel/Content/SlotsPanel/SlotRow2"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+text = "Удалить"
+disabled = true
+focus_mode = 0
+
+[node name="SlotRow3" type="HBoxContainer" parent="CenterContainer/Panel/Content/SlotsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Slot3Button" type="Button" parent="CenterContainer/Panel/Content/SlotsPanel/SlotRow3"]
+custom_minimum_size = Vector2(320, 48)
+layout_mode = 2
+text = "Слот 3  —  Новый персонаж"
+focus_mode = 0
+
+[node name="DeleteSlot3Button" type="Button" parent="CenterContainer/Panel/Content/SlotsPanel/SlotRow3"]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+text = "Удалить"
+disabled = true
+focus_mode = 0
+
+[node name="ClassPanel" type="VBoxContainer" parent="CenterContainer/Panel/Content"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ClassTitle" type="Label" parent="CenterContainer/Panel/Content/ClassPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Выбери класс"
+horizontal_alignment = 1
+
+[node name="KnightButton" type="Button" parent="CenterContainer/Panel/Content/ClassPanel"]
+custom_minimum_size = Vector2(390, 60)
+layout_mode = 2
+toggle_mode = true
+text = "РЫЦАРЬ"
+focus_mode = 0
+
+[node name="ClassDescription" type="Label" parent="CenterContainer/Panel/Content/ClassPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.72, 0.68, 1)
+text = "Рыцарь — стойкий боец ближнего боя."
+horizontal_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="CenterContainer/Panel/Content/ClassPanel"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="ConfirmButton" type="Button" parent="CenterContainer/Panel/Content/ClassPanel/Actions"]
+custom_minimum_size = Vector2(190, 44)
+layout_mode = 2
+text = "Создать персонажа"
+disabled = true
+
+[node name="BackToSlotsButton" type="Button" parent="CenterContainer/Panel/Content/ClassPanel/Actions"]
+custom_minimum_size = Vector2(130, 44)
+layout_mode = 2
+text = "Назад"
+
+[node name="BackButton" type="Button" parent="CenterContainer/Panel/Content"]
+layout_mode = 2
+text = "В главное меню"
+
+[node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
+title = "Удалить сохранение?"
+dialog_text = "Весь прогресс в этом слоте будет удалён без возможности восстановления."

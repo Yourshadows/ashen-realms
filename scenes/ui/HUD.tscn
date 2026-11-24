@@ -1,0 +1,427 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud_script"]
+[ext_resource type="Script" path="res://scripts/ui/character_preview.gd" id="2_character_preview"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inventory_panel"]
+bg_color = Color(0.075, 0.078, 0.082, 0.98)
+border_color = Color(0.43, 0.35, 0.23, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_experience_background"]
+bg_color = Color(0.035, 0.035, 0.04, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_experience_fill"]
+bg_color = Color(0.73, 0.43, 0.14, 1)
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud_script")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.015, 0.018, 0.022, 0.8)
+
+[node name="InventoryPanel" type="PanelContainer" parent="."]
+visible = false
+offset_left = 16.0
+offset_top = 10.0
+offset_right = 624.0
+offset_bottom = 326.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_inventory_panel")
+
+[node name="Content" type="MarginContainer" parent="InventoryPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="Layout" type="VBoxContainer" parent="InventoryPanel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="HBoxContainer" parent="InventoryPanel/Content/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="InventoryPanel/Content/Layout/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.91, 0.78, 0.56, 1)
+theme_override_font_sizes/font_size = 17
+text = "ASHEN REALMS  /  ПЕРСОНАЖ"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="InventoryPanel/Content/Layout/Header"]
+custom_minimum_size = Vector2(26, 24)
+layout_mode = 2
+text = "×"
+focus_mode = 0
+
+[node name="Tabs" type="TabContainer" parent="InventoryPanel/Content/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/side_margin = 4
+
+[node name="Inventory" type="HBoxContainer" parent="InventoryPanel/Content/Layout/Tabs"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="InventoryColumn" type="VBoxContainer" parent="InventoryPanel/Content/Layout/Tabs/Inventory"]
+custom_minimum_size = Vector2(218, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="InventoryCaption" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Inventory/InventoryColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.75, 0.65, 1)
+text = "ИНВЕНТАРЬ"
+
+[node name="InventoryGrid" type="GridContainer" parent="InventoryPanel/Content/Layout/Tabs/Inventory/InventoryColumn"]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 12
+
+[node name="CharacterColumn" type="VBoxContainer" parent="InventoryPanel/Content/Layout/Tabs/Inventory"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 3
+
+[node name="CharacterPreview" type="Control" parent="InventoryPanel/Content/Layout/Tabs/Inventory/CharacterColumn"]
+custom_minimum_size = Vector2(140, 120)
+layout_mode = 2
+script = ExtResource("2_character_preview")
+
+[node name="CharacterLevelLabel" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Inventory/CharacterColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.76, 0.47, 1)
+theme_override_font_sizes/font_size = 14
+text = "Уровень 1"
+horizontal_alignment = 1
+
+[node name="CharacterClassLabel" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Inventory/CharacterColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.68, 0.64, 1)
+theme_override_font_sizes/font_size = 11
+text = "Рыцарь"
+horizontal_alignment = 1
+
+[node name="EquipmentColumn" type="VBoxContainer" parent="InventoryPanel/Content/Layout/Tabs/Inventory"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="EquipmentCaption" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Inventory/EquipmentColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.75, 0.65, 1)
+text = "ЭКИПИРОВКА"
+
+[node name="EquipmentGrid" type="GridContainer" parent="InventoryPanel/Content/Layout/Tabs/Inventory/EquipmentColumn"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="WeaponSlot" type="Button" parent="InventoryPanel/Content/Layout/Tabs/Inventory/EquipmentColumn/EquipmentGrid"]
+custom_minimum_size = Vector2(58, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Оружие\nПусто"
+focus_mode = 0
+
+[node name="HeadSlot" type="Button" parent="InventoryPanel/Content/Layout/Tabs/Inventory/EquipmentColumn/EquipmentGrid"]
+custom_minimum_size = Vector2(58, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Голова\nПусто"
+disabled = true
+focus_mode = 0
+
+[node name="ChestSlot" type="Button" parent="InventoryPanel/Content/Layout/Tabs/Inventory/EquipmentColumn/EquipmentGrid"]
+custom_minimum_size = Vector2(58, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Броня\nПусто"
+disabled = true
+focus_mode = 0
+
+[node name="RingSlot" type="Button" parent="InventoryPanel/Content/Layout/Tabs/Inventory/EquipmentColumn/EquipmentGrid"]
+custom_minimum_size = Vector2(58, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Кольцо\nПусто"
+disabled = true
+focus_mode = 0
+
+[node name="GlovesSlot" type="Button" parent="InventoryPanel/Content/Layout/Tabs/Inventory/EquipmentColumn/EquipmentGrid"]
+custom_minimum_size = Vector2(58, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Перчатки\nПусто"
+disabled = true
+focus_mode = 0
+
+[node name="BootsSlot" type="Button" parent="InventoryPanel/Content/Layout/Tabs/Inventory/EquipmentColumn/EquipmentGrid"]
+custom_minimum_size = Vector2(58, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "Сапоги\nПусто"
+disabled = true
+focus_mode = 0
+
+[node name="Map" type="VBoxContainer" parent="InventoryPanel/Content/Layout/Tabs"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="MapLayout" type="VBoxContainer" parent="InventoryPanel/Content/Layout/Tabs/Map"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MapTitle" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Map/MapLayout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.78, 0.56, 1)
+theme_override_font_sizes/font_size = 18
+text = "КАРТА МИРА"
+horizontal_alignment = 1
+
+[node name="MapLocationLabel" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Map/MapLayout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.73, 1)
+text = "Текущая локация: Пепельные поля"
+horizontal_alignment = 1
+
+[node name="Route" type="HBoxContainer" parent="InventoryPanel/Content/Layout/Tabs/Map/MapLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+theme_override_constants/separation = 22
+
+[node name="AshenLocation" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Map/MapLayout/Route"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "ПЕПЕЛЬНЫЕ ПОЛЯ"
+
+[node name="RouteArrow" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Map/MapLayout/Route"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.63, 0.53, 0.36, 1)
+theme_override_font_sizes/font_size = 22
+text = "→"
+
+[node name="ForestLocation" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Map/MapLayout/Route"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "ЛЕСНЫЕ РУИНЫ"
+
+[node name="MapHint" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Map/MapLayout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.58, 0.55, 1)
+text = "Иди по тропе к восточным воротам, чтобы попасть в руины."
+horizontal_alignment = 1
+
+[node name="Talents" type="VBoxContainer" parent="InventoryPanel/Content/Layout/Tabs"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TalentTitle" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Talents"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.78, 0.56, 1)
+theme_override_font_sizes/font_size = 18
+text = "ДРЕВО ТАЛАНТОВ"
+horizontal_alignment = 1
+
+[node name="TalentHint" type="Label" parent="InventoryPanel/Content/Layout/Tabs/Talents"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.58, 0.55, 1)
+text = "Навыки для классов добавим позже."
+horizontal_alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="InventoryPanel/Content/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CurrencyPanel" type="VBoxContainer" parent="InventoryPanel/Content/Layout/Footer"]
+custom_minimum_size = Vector2(112, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="CurrencyTitle" type="Label" parent="InventoryPanel/Content/Layout/Footer/CurrencyPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.77, 0.69, 0.53, 1)
+text = "ВАЛЮТА"
+
+[node name="SilverLabel" type="Label" parent="InventoryPanel/Content/Layout/Footer/CurrencyPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.84, 0.56, 1)
+theme_override_font_sizes/font_size = 14
+text = "◆  0 серебра"
+
+[node name="StatsPanel" type="VBoxContainer" parent="InventoryPanel/Content/Layout/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="StatControls" type="HBoxContainer" parent="InventoryPanel/Content/Layout/Footer/StatsPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+theme_override_constants/separation = 6
+
+[node name="StatPointsLabel" type="Label" parent="InventoryPanel/Content/Layout/Footer/StatsPanel/StatControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.91, 0.78, 0.56, 1)
+theme_override_font_sizes/font_size = 12
+text = "Очки: 0"
+
+[node name="StatButtons" type="HBoxContainer" parent="InventoryPanel/Content/Layout/Footer/StatsPanel/StatControls"]
+layout_mode = 2
+alignment = 2
+theme_override_constants/separation = 3
+
+[node name="VitalityButton" type="Button" parent="InventoryPanel/Content/Layout/Footer/StatsPanel/StatControls/StatButtons"]
+custom_minimum_size = Vector2(54, 26)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "ЗДР +"
+disabled = true
+
+[node name="StrengthButton" type="Button" parent="InventoryPanel/Content/Layout/Footer/StatsPanel/StatControls/StatButtons"]
+custom_minimum_size = Vector2(54, 26)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "АТК +"
+disabled = true
+
+[node name="ArcanaButton" type="Button" parent="InventoryPanel/Content/Layout/Footer/StatsPanel/StatControls/StatButtons"]
+custom_minimum_size = Vector2(54, 26)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "НАВ +"
+disabled = true
+
+[node name="AttackSpeedButton" type="Button" parent="InventoryPanel/Content/Layout/Footer/StatsPanel/StatControls/StatButtons"]
+custom_minimum_size = Vector2(54, 26)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "СКР +"
+disabled = true
+
+[node name="StatsSummaryLabel" type="Label" parent="InventoryPanel/Content/Layout/Footer/StatsPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.72, 0.68, 1)
+theme_override_font_sizes/font_size = 10
+text = "ЗДР 100  |  АТК 10  |  СКР 1.25  |  НАВ 25"
+horizontal_alignment = 2
+
+[node name="SkillHotbar" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -108.0
+offset_top = -78.0
+offset_right = 108.0
+offset_bottom = -42.0
+theme_override_constants/separation = 2
+alignment = 1
+mouse_filter = 2
+
+[node name="WSlot" type="Button" parent="SkillHotbar"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "W"
+tooltip_text = "Cleave — удар полукругом в сторону курсора"
+mouse_filter = 2
+focus_mode = 0
+
+[node name="ESlot" type="Button" parent="SkillHotbar"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "E"
+tooltip_text = "Пустой слот"
+disabled = true
+mouse_filter = 2
+focus_mode = 0
+
+[node name="RSlot" type="Button" parent="SkillHotbar"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "R"
+tooltip_text = "Пустой слот"
+disabled = true
+mouse_filter = 2
+focus_mode = 0
+
+[node name="OneSlot" type="Button" parent="SkillHotbar"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "1"
+tooltip_text = "Пустой слот"
+disabled = true
+mouse_filter = 2
+focus_mode = 0
+
+[node name="TwoSlot" type="Button" parent="SkillHotbar"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "2"
+tooltip_text = "Пустой слот"
+disabled = true
+mouse_filter = 2
+focus_mode = 0
+
+[node name="ThreeSlot" type="Button" parent="SkillHotbar"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "3"
+tooltip_text = "Пустой слот"
+disabled = true
+mouse_filter = 2
+focus_mode = 0
+
+[node name="LevelLabel" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -36.0
+offset_bottom = -17.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.91, 0.76, 0.48, 1)
+theme_override_font_sizes/font_size = 13
+text = "Уровень 1  ·  0 / 100 опыта"
+horizontal_alignment = 1
+mouse_filter = 2
+
+[node name="ExperienceBar" type="ProgressBar" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -14.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_experience_background")
+theme_override_styles/fill = SubResource("StyleBoxFlat_experience_fill")
+show_percentage = false
+mouse_filter = 2
+focus_mode = 0
